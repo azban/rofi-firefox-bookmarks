@@ -75,10 +75,12 @@ def write_rofi_input(profile_loc, search_path=[], sep=' / '):
                     icon = favicons.execute(f"""SELECT max(ic.data) FROM moz_pages_w_icons pg, moz_icons_to_pages rel, moz_icons ic
                                                                     WHERE pg.id = rel.page_id AND ic.id=rel.icon_id AND pg.page_url=?
                                              """ , (url,)).fetchone()[0]
+
+                    row = f"{path}\0info\x1f{url}\x1fmeta\x1f{url}"
                     if icon:
-                        print(f"{path}\x00info\x1f{url}\x1ficon\x1f{cache_icon(icon)}")
+                        print(f"{row}\x1ficon\x1f{cache_icon(icon)}")
                     else:
-                        print(f"{path}\x00info\x1f{url}")
+                        print(row)
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="generate list of bookmarks with icons for rofi")
