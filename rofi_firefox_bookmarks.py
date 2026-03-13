@@ -82,7 +82,7 @@ def write_rofi_input(profile_loc, search_path=[], sep=' / '):
                     else:
                         print(row)
 
-if __name__ == "__main__":
+def main():
     parser = ArgumentParser(description="generate list of bookmarks with icons for rofi")
     parser.add_argument('path',              default="",    nargs='?',      help="restrict list to a bookmark folder")
     parser.add_argument('-s', '--separator', default=" / ", metavar='sep',  help="seperator for paths")
@@ -97,3 +97,6 @@ if __name__ == "__main__":
         profile_path = default_profile_path() if args.profile is None else path_from_name(args.profile)
 
         write_rofi_input(profile_path, search_path=search_path, sep=args.separator)
+
+if __name__ == "__main__":
+    main()
